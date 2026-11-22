@@ -1,0 +1,12 @@
+#!name=G1 ACQ Ultra+Pro
+#!desc=Google One /ai SKU map: Ultra + Pro acq. Logs ios productIds. No telemetry.
+#!system=ios
+
+[Rule]
+AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT-NO-DROP
+
+[Script]
+g1-acq = type=http-response,pattern=^https:\/\/one\.google\.com\/ai\?,requires-body=1,max-size=0,script-path=https://cdn.jsdelivr.net/gh/c8yyd8yq47-boop/g1-acq-ultra-pro@main/g1-acq-ultra-pro.js
+
+[MITM]
+hostname = %APPEND% one.google.com
